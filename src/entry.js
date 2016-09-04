@@ -40,3 +40,20 @@ app.ports.signup.subscribe(function (data) {
     app.ports.signupSuccess.send({ username: cognitoUser.getUsername() })
   })
 })
+
+app.ports.confirmUser.subscribe(function (data) {
+  var userData = {
+    Username: data.username,
+    Pool: userPool
+  }
+
+  var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData)
+  cognitoUser.confirmRegistration(data.code, true, function (err, result) {
+    if (err) {
+      app.ports.errors.send(err.message)
+      return
+    }
+
+    app.ports.confirmUserSuccess.send(null)
+  })
+})

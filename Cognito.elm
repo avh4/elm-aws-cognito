@@ -1,4 +1,14 @@
-port module Cognito exposing (signup, errors, signupSuccess)
+port module Cognito
+    exposing
+        ( errors
+        , signup
+        , signupSuccess
+        , confirmUser
+        , confirmUserSuccess
+        )
+
+
+port errors : (String -> msg) -> Sub msg
 
 
 port signup :
@@ -9,7 +19,14 @@ port signup :
     -> Cmd msg
 
 
-port errors : (String -> msg) -> Sub msg
-
-
 port signupSuccess : ({ username : String } -> msg) -> Sub msg
+
+
+port confirmUser :
+    { username : String
+    , code : String
+    }
+    -> Cmd msg
+
+
+port confirmUserSuccess : (() -> msg) -> Sub msg
