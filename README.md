@@ -7,4 +7,5 @@ https://www.twitch.tv/avh4
 
 ```bash
 npm run build
+elm-make --output elm.js Main.elm
 ```

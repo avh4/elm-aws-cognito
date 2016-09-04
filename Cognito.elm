@@ -1,4 +1,4 @@
-port module Cognito exposing (signup)
+port module Cognito exposing (signup, errors, signupSuccess)
 
 
 port signup :
@@ -7,3 +7,9 @@ port signup :
     , email : String
     }
     -> Cmd msg
+
+
+port errors : (String -> msg) -> Sub msg
+
+
+port signupSuccess : ({ username : String } -> msg) -> Sub msg

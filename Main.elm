@@ -18,15 +18,17 @@ type alias Model =
 
 initialModel =
     { signupForm =
-        { username = "demo2"
+        { username = "demo3"
         , password = "password"
-        , email = "gruen0aermel+elmlive+demo2@gmail.com"
+        , email = "gruen0aermel+elmlive+demo3@gmail.com"
         }
     }
 
 
 type Msg
     = DoSignUp
+    | CognitoError String
+    | CognitoSignupSuccess { username : String }
 
 
 update msg model =
@@ -35,6 +37,12 @@ update msg model =
             ( model
             , Cognito.signup model.signupForm
             )
+
+        CognitoError _ ->
+            ( model, Cmd.none )
+
+        CognitoSignupSuccess _ ->
+            ( model, Cmd.none )
 
 
 view model =
@@ -65,7 +73,12 @@ view model =
 main =
     Html.App.program
         { init = ( initialModel, Cmd.none )
-        , subscriptions = \model -> Sub.none
+        , subscriptions =
+            \model ->
+                Sub.batch
+                    [ Cognito.signupSuccess CognitoSignupSuccess
+                    , Cognito.errors CognitoError
+                    ]
         , update = update
         , view = view
         }
