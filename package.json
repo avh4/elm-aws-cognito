@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "devDependencies": {
+    "exports-loader": "^0.6.3",
+    "source-map-loader": "^0.1.5",
+    "webpack": "^1.13.2"
+  },
+  "dependencies": {
+    "amazon-cognito-identity-js": "^1.2.0",
+    "aws-sdk": "^2.5.5",
+    "jsbn": "^0.1.0",
+    "sjcl": "^1.0.3"
+  },
+  "scripts": {
+    "build": "webpack"
+  }
+}
